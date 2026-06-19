@@ -1,403 +1,1046 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-
+<html lang="en">
 <head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vinay Karande — Principal Software & Data Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #eef0f4;
+    --ink-muted: #8b95a8;
+    --ink-faint: #4a5468;
+    --surface: #0d0f14;
+    --surface-alt: #13161d;
+    --border: rgba(255,255,255,0.07);
+    --accent: #4f8ef7;
+    --accent-glow: rgba(79,142,247,0.14);
+    --accent-warm: #f59e0b;
+    --mono: 'JetBrains Mono', monospace;
+    --display: 'Syne', sans-serif;
+    --body: 'Inter', sans-serif;
+    --radius: 12px;
+    --radius-sm: 6px;
+    --nav-h: 64px;
+  }
 
-   <meta charset="utf-8">
-   <title>Vinay Karande - A software developer.</title>
-   <meta name="description" content="">
-   <meta name="author" content="">
-   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-   <link rel="stylesheet" href="css/default.css">
-   <link rel="stylesheet" href="css/layout.css">
-   <link rel="stylesheet" href="css/media-queries.css">
-   <link rel="stylesheet" href="css/magnific-popup.css">
-   <script src="js/modernizr.js"></script>
-   <link rel="shortcut icon" href="favicon.png">
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: var(--body);
+    background: var(--surface);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--nav-h);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    background: rgba(13,15,20,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px; font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500;
+    color: var(--ink-muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── LAYOUT ── */
+  main { padding-top: var(--nav-h); }
+  section { padding: 96px 5vw; }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: calc(100vh - var(--nav-h));
+    display: flex; align-items: center;
+    padding: 80px 5vw 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid {
+    max-width: 1100px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 380px; gap: 80px; align-items: center;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px; font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block; width: 28px; height: 1px;
+    background: var(--accent);
+  }
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  h1 .accent-word { color: var(--accent); }
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--ink-muted);
+    max-width: 540px;
+    line-height: 1.75;
+    margin-bottom: 36px;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px;
+    font-size: 13px; font-weight: 600;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    border: 1px solid var(--accent);
+  }
+  .btn-primary:hover { background: #1d4ed8; border-color: #1d4ed8; transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { background: var(--surface-alt); border-color: rgba(13,15,18,0.2); transform: translateY(-1px); }
+
+  /* stat card panel */
+  .hero-stats {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .stat-card {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    position: relative; overflow: hidden;
+  }
+  .stat-card::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--accent);
+  }
+  .stat-num {
+    font-family: var(--display);
+    font-size: 2.2rem; font-weight: 800;
+    color: var(--ink); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 500;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .stat-card.warm::before { background: var(--accent-warm); }
+  .stat-card.warm .stat-num { color: var(--accent-warm); }
+
+  /* ── SECTION HEADERS ── */
+  .section-header { margin-bottom: 56px; }
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-family: var(--display);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--surface-alt); }
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-left {}
+  .timeline-date {
+    font-family: var(--mono);
+    font-size: 11px; font-weight: 500;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .timeline-company {
+    font-size: 13px; font-weight: 600;
+    color: var(--ink-muted);
+    margin-bottom: 4px;
+  }
+  .timeline-location {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-faint);
+  }
+  .timeline-right {}
+  .timeline-role {
+    font-family: var(--display);
+    font-size: 1.25rem; font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .timeline-tag {
+    display: inline-block;
+    background: var(--accent-glow);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 99px;
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+  .timeline-desc {
+    font-size: 0.925rem;
+    color: var(--ink-muted);
+    line-height: 1.8;
+  }
+  .timeline-bullets {
+    list-style: none;
+    margin-top: 12px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .timeline-bullets li {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.65;
+  }
+  .timeline-bullets li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+    top: 4px;
+  }
+  .highlight-metric {
+    font-family: var(--mono);
+    font-weight: 500;
+    color: var(--ink);
+    background: var(--accent-glow);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.85em;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .skill-card {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .skill-card-icon {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+  .skill-card-title {
+    font-family: var(--mono);
+    font-size: 11px; font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .skill-tags {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .tag {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--ink-muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: all 0.15s;
+  }
+  .tag:hover { background: var(--accent-glow); border-color: var(--accent); color: var(--accent); }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--surface-alt); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    display: flex; flex-direction: column;
+    gap: 16px;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .project-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .project-card:hover::after { transform: scaleX(1); }
+  .project-num {
+    font-family: var(--mono);
+    font-size: 11px; color: var(--ink-faint);
+    letter-spacing: 0.08em;
+  }
+  .project-title {
+    font-family: var(--display);
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    flex: 1;
+  }
+  .project-stack {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .stack-tag {
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 4px;
+    background: var(--accent-glow);
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── ACHIEVEMENTS ── */
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .achievement-card {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .achievement-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .achievement-title {
+    font-size: 0.9rem; font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .achievement-date {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: #080a0e;
+    color: #fff;
+  }
+  #contact .section-eyebrow { color: #60a5fa; }
+  #contact h2 { color: #fff; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .contact-desc {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .contact-links {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .contact-link {
+    display: flex; align-items: center; gap: 14px;
+    text-decoration: none;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.95rem;
+    padding: 16px 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    transition: all 0.2s;
+    background: rgba(255,255,255,0.03);
+  }
+  .contact-link:hover {
+    border-color: #60a5fa;
+    background: rgba(96,165,250,0.08);
+    color: #fff;
+    transform: translateX(4px);
+  }
+  .contact-link-icon {
+    font-size: 1.1rem;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .contact-link-text { flex: 1; }
+  .contact-link-label {
+    font-family: var(--mono);
+    font-size: 10px; color: rgba(255,255,255,0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .contact-link-value { font-weight: 500; font-size: 0.9rem; }
+  .contact-link-arrow { color: rgba(255,255,255,0.3); font-size: 0.85rem; }
+  .contact-right {
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .open-to-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid rgba(74,222,128,0.3);
+    border-radius: 99px;
+    background: rgba(74,222,128,0.07);
+    margin-bottom: 8px;
+  }
+  .open-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .open-label {
+    font-family: var(--mono);
+    font-size: 11px; font-weight: 500;
+    color: #4ade80;
+    letter-spacing: 0.08em;
+  }
+  .contact-tagline {
+    font-family: var(--display);
+    font-size: 1.6rem; font-weight: 800;
+    color: #fff; line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+  .contact-note {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050608;
+    padding: 24px 5vw;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  footer p {
+    font-family: var(--mono);
+    font-size: 11px; color: rgba(255,255,255,0.25);
+    letter-spacing: 0.04em;
+  }
+  footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  footer a:hover { color: #60a5fa; }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── QUOTE ── */
+  .site-quote {
+    position: relative;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 56px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface-alt);
+    text-align: center;
+  }
+  .quote-mark {
+    font-family: var(--display);
+    font-size: 7rem;
+    font-weight: 800;
+    color: var(--accent);
+    opacity: 0.18;
+    line-height: 0.5;
+    position: absolute;
+    top: 32px; left: 40px;
+    user-select: none;
+  }
+  .quote-text {
+    font-family: var(--display);
+    font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .quote-attr {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero-stats { flex-direction: row; flex-wrap: wrap; }
+    .stat-card { flex: 1; min-width: 130px; }
+    .timeline-item { grid-template-columns: 1fr; gap: 12px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    .nav-links { gap: 1rem; }
+  }
+  @media (max-width: 560px) {
+    section { padding: 64px 5vw; }
+    .nav-links { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up { opacity: 1; transform: none; transition: none; }
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
 </head>
-
 <body>
 
-   <header id="home">
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">VK.dev</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#achievements">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-      <nav id="nav-wrap">
-
-         <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
-         <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
-
-         <ul id="nav" class="nav">
-            <li class="current"><a class="smoothscroll" href="#home">Home</a></li>
-            <li><a class="smoothscroll" href="#about">About</a></li>
-            <li><a class="smoothscroll" href="#resume">Resume</a></li>
-            <li><a class="smoothscroll" href="#resume">Works</a></li>
-            <li><a class="smoothscroll" href="#contact">Contact</a></li>
-         </ul>
-
-      </nav>
-
-      <div class="row banner">
-         <div class="banner-text">
-            <h1 class="responsive-headline">I'm Vinay Karande.</h1>
-            <h3>I'm a Pune based <span>software developer</span>, <span>security enthusiast</span> and creating awesome and
-               effective android application for all sizes around the globe. Let's <a class="smoothscroll"
-                  href="#about">start scrolling</a>
-               and learn more <a class="smoothscroll" href="#about">about me</a>.</h3>
-            <hr />
-            <ul class="social">
-               <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-               <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-               <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-               <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-               <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-               <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-               <li><a href="#"><i class="fa fa-skype"></i></a></li>
-            </ul>
-         </div>
-      </div>
-
-      <p class="scrolldown">
-         <a class="smoothscroll" href="#about"><i class="icon-down-circle"></i></a>
+<main>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">Principal Software &amp; Data Engineer</div>
+      <h1>Building systems that<br/><span class="accent-word">scale</span> at the edge<br/>of complexity.</h1>
+      <p class="hero-desc">
+        8 years shaping backend, data, and GenAI platforms across AdTech, EdTech, and Identity Systems.
+        Currently leading agentic AI and real-time streaming infrastructure at PubMatic, Pune.
       </p>
+      <div class="hero-ctas">
+        <a href="mailto:karandevinay@gmail.com" class="btn btn-primary">Get in touch →</a>
+        <a href="#experience" class="btn btn-ghost">View experience</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Years of experience</div>
+      </div>
+      <div class="stat-card warm">
+        <div class="stat-num">240M</div>
+        <div class="stat-label">Records processed daily</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3K</div>
+        <div class="stat-label">QPS achieved per data center</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">MCP data source integrations</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-   </header>
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-eyebrow">Career</div>
+      <h2>Experience</h2>
+    </div>
+    <div class="timeline">
 
-   <section id="about">
-
-      <div class="row">
-
-         <div class="three columns">
-
-            <img class="profile-pic" src="images/profilepic.jpg" alt="" />
-
-         </div>
-
-         <div class="nine columns main-col">
-
-            <h2>About Me</h2>
-
-            <p>One of the finest engineer nurtured from one of the prestigious institute of India and would like to
-               utilise my intensive problem solving and analytical skills with the
-               knowledge in the field of computer science for the sake of your esteemed organisation.
-
-               The Self-motivated, organized and
-               passionate developer with high
-               learning curve and seeking position
-               for android development.
-
-            </p>
-
-            <div class="row">
-
-               <div class="columns contact-details">
-
-                  <h2>Contact Details</h2>
-                  <p class="address">
-                     <span>Vinay Karande</span><br>
-                     <span>1600 Nikash Parkway<br>
-                        Pashan View, PO 94043 Pune
-                     </span><br>
-                     <span>+91-8080061558</span><br>
-                     <span>karandevinay@gmail.com</span>
-                  </p>
-
-               </div>
-
-               <div class="columns download">
-                  <p>
-                     <a href="#" class="button"><i class="fa fa-download"></i>Download Resume</a>
-                  </p>
-               </div>
-
-            </div> <!-- end row -->
-
-         </div> <!-- end .main-col -->
-
+      <div class="timeline-item fade-up">
+        <div class="timeline-left">
+          <div class="timeline-date">Sep 2022 – Present</div>
+          <div class="timeline-company">PubMatic</div>
+          <div class="timeline-location">Pune, India</div>
+        </div>
+        <div class="timeline-right">
+          <div class="timeline-role">Principal Software Engineer</div>
+          <span class="timeline-tag">AdTech · GenAI · Real-time Systems</span>
+          <ul class="timeline-bullets">
+            <li>Leading end-to-end agentic AI system using <span class="highlight-metric">LangGraph + Langfuse</span> for deal debugging and auto-healing — integrated with <span class="highlight-metric">20 MCP data sources</span> to identify root causes of underperformance.</li>
+            <li>Managing and mentoring a full scrum team of <span class="highlight-metric">9–11 engineers</span>, owning delivery, technical direction, and execution end-to-end.</li>
+            <li>Designed BURL: a real-time, high-throughput system processing <span class="highlight-metric">240M records/day</span> from Kafka using Confluent Parallel Consumers — deployed on Kubernetes across <span class="highlight-metric">10 data centers</span>, hitting <span class="highlight-metric">3K QPS</span> with sub-3-second SLA.</li>
+            <li>Architected distributed Spring-based systems and built multiple end-to-end Spark ETL pipelines loading data into Snowflake for business insights.</li>
+          </ul>
+        </div>
       </div>
 
-   </section> <!-- About Section End-->
-
-   <section id="resume">
-
-      <div class="row education">
-
-         <div class="three columns header-col">
-            <h1><span>Education</span></h1>
-         </div>
-
-         <div class="nine columns main-col">
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>College of Engineering Pune</h3>
-                  <p class="info">Bachelor of Technology<span>&bull;</span> <em class="date">April 2018</em></p>
-
-                  <p>
-                     Design and implement services, applications, and frameworks for mobile platforms to change how fans interact with sports content; integrate solutions into innovative core technologies and frameworks.
-                     Work as part of team to define and implement solutions in alignment with IoT Advanced Technology GroupÕs roadmap.
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>School of Information Technology</h3>
-                  <p class="info">Micro Degree in UI/UX <span>&bull;</span> <em class="date">March 2015</em></p>
-
-                  <p>
-                     Developed new features for proprietary Android applications used on phones and tablets; worked with developers to develop top tier solutions for restaurant customers.
-                     Maintained long and short-range deliverables with product management team according to product roadmaps.
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-         </div> <!-- main-col end -->
-
-      </div> <!-- End Education -->
-
-
-      <!-- Work
-      ----------------------------------------------- -->
-      <div class="row work">
-
-         <div class="three columns header-col">
-            <h1><span>Work</span></h1>
-         </div>
-
-         <div class="nine columns main-col">
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>Pongo Technology Studio</h3>
-                  <p class="info">Senior Android Developer <span>&bull;</span> <em class="date">Aug 2019 - Present</em></p>
-
-                  <p>
-                     Designed and built advanced game applications for Android platform, and collaborated with cross-functional teams to define, design, and launch new features.
-                     Tested code for robustness, executed edge case, usability, and general reliability analysis.
-                     Integrated multiple systems to move data between layers of software stack.
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>Pongo Technology Studio</h3>
-                  <p class="info">Junior android Designer <span>&bull;</span> <em class="date">Sep 2018 - Aug 2019</em></p>
-
-                  <p>
-                     Fixed bugs and improved application performance.
-                     Partnered with artists, QA, and internal developers to maintain best practices.
-                     Managed tasks within Agile framework, cleared Sprinted tasks, and controlled JIRA workflows.
-                     Devised RESTful services with Java Apache CXF and performed code reviews for peers.
-                  </p>
-
-               </div>
-
-            </div> 
-
-         </div> <!-- main-col end -->
-
-      </div> <!-- End Work -->
-
-
-      <!-- Skills
-      ----------------------------------------------- -->
-      <div class="row skill">
-
-         <div class="three columns header-col">
-            <h1><span>Skills</span></h1>
-         </div>
-
-         <div class="nine columns main-col">
-
-            <p>Android Development-Kotlin & Dart, Git version control management,
-               Docker container, Gradle Dependancy Management, MavenTrees,
-               Spring Boot with Kotlin and Gradle,Continuous integration using Jenkin,
-               Mongo Database Server,User experience and user interface prototype,
-               Server Deployment, Express JavaScript withNode.js
-            </p>
-
-            <div class="bars">
-
-               <ul class="skills">
-                  <li><span class="bar-expand photoshop"></span><em>Adobe XD</em></li>
-                  <li><span class="bar-expand illustrator"></span><em>Illustrator</em></li>
-                  <li><span class="bar-expand wordpress"></span><em>Javascript</em></li>
-                  <li><span class="bar-expand css"></span><em>Kotlin</em></li>
-                  <li><span class="bar-expand html5"></span><em>Java</em></li>
-                  <li><span class="bar-expand jquery"></span><em>Docker</em></li>
-               </ul>
-
-            </div><!-- end skill-bars -->
-
-         </div> <!-- main-col end -->
-
-      </div> <!-- End skills -->
-
-   </section> <!-- Resume Section End-->
-
-   </div> <!-- row End -->
-
-   </section> <!-- Portfolio Section End-->
-
-   <section id="contact">
-
-      <div class="row section-head">
-
-         <div class="two columns header-col">
-
-            <h1><span>Get In Touch.</span></h1>
-
-         </div>
-
-         <div class="ten columns">
-
-            <p class="lead">
-               Feel free to get in touch with me, I would response back as soon as possible. No need to add extra details just message and contact are fine.
-               See you on the other end. Thank you!
-            </p>
-
-         </div>
-
+      <div class="timeline-item fade-up">
+        <div class="timeline-left">
+          <div class="timeline-date">Jun 2021 – Aug 2022</div>
+          <div class="timeline-company">WhiteHat Jr. / BYJU'S</div>
+          <div class="timeline-location">Mumbai, India</div>
+        </div>
+        <div class="timeline-right">
+          <div class="timeline-role">Senior Software Engineer</div>
+          <span class="timeline-tag">EdTech · Backend Architecture</span>
+          <ul class="timeline-bullets">
+            <li>Designed and built the entire backend architecture for English Course features from scratch, successfully launching them into beta.</li>
+            <li>Led backend development supporting scalable APIs for Coding, Math, English, and Arts courses across Android and iOS platforms.</li>
+            <li>Implemented an automated thumbnail generation framework capable of extracting from videos, PDFs, and YouTube content.</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="row">
+      <div class="timeline-item fade-up">
+        <div class="timeline-left">
+          <div class="timeline-date">Oct 2018 – May 2021</div>
+          <div class="timeline-company">eQ Technologic</div>
+          <div class="timeline-location">Pune, India</div>
+        </div>
+        <div class="timeline-right">
+          <div class="timeline-role">Software Engineer</div>
+          <span class="timeline-tag">Identity · Security · SSO</span>
+          <ul class="timeline-bullets">
+            <li>Designed and implemented an enterprise-grade <span class="highlight-metric">OAuth 2.0 (RFC 6749)</span> authorization framework and scalable SSO authentication systems.</li>
+            <li>Built Security-as-a-Service solutions using SAML, Kerberos, SPNEGO, NTLM, certificate-based authentication, and LDAP.</li>
+            <li>Analyzed security risks and drove mitigation strategies across core products, contributing to platform-wide SSO and custom data access layers.</li>
+          </ul>
+        </div>
+      </div>
 
-         <div class="eight columns">
+    </div>
+  </div>
+</section>
 
-            <!-- form -->
-            <form action="" method="post" id="contactForm" name="contactForm">
-               <fieldset>
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-eyebrow">Toolkit</div>
+      <h2>Technical skills</h2>
+    </div>
+    <div class="skills-grid">
 
-                  <div>
-                     <label for="contactName">Name <span class="required">*</span></label>
-                     <input type="text" value="" size="35" id="contactName" name="contactName">
-                  </div>
+      <div class="skill-card fade-up">
+        <div class="skill-card-icon">🤖</div>
+        <div class="skill-card-title">AI &amp; GenAI</div>
+        <div class="skill-tags">
+          <span class="tag">LangChain</span>
+          <span class="tag">LangGraph</span>
+          <span class="tag">Langfuse</span>
+          <span class="tag">LLM Orchestration</span>
+          <span class="tag">Milvus</span>
+          <span class="tag">Vector Search</span>
+          <span class="tag">MCP</span>
+          <span class="tag">Agentic Systems</span>
+        </div>
+      </div>
 
-                  <div>
-                     <label for="contactEmail">Email <span class="required">*</span></label>
-                     <input type="text" value="" size="35" id="contactEmail" name="contactEmail">
-                  </div>
+      <div class="skill-card fade-up">
+        <div class="skill-card-icon">☕</div>
+        <div class="skill-card-title">Languages &amp; Frameworks</div>
+        <div class="skill-tags">
+          <span class="tag">Java</span>
+          <span class="tag">Python</span>
+          <span class="tag">Scala</span>
+          <span class="tag">Spring Boot</span>
+          <span class="tag">FastAPI</span>
+        </div>
+      </div>
 
-                  <div>
-                     <label for="contactSubject">Subject</label>
-                     <input type="text" value="" size="35" id="contactSubject" name="contactSubject">
-                  </div>
+      <div class="skill-card fade-up">
+        <div class="skill-card-icon">⚡</div>
+        <div class="skill-card-title">Streaming &amp; Data</div>
+        <div class="skill-tags">
+          <span class="tag">Apache Kafka</span>
+          <span class="tag">Apache Spark</span>
+          <span class="tag">Hadoop</span>
+          <span class="tag">Snowflake</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Redis</span>
+        </div>
+      </div>
 
-                  <div>
-                     <label for="contactMessage">Message <span class="required">*</span></label>
-                     <textarea cols="25" rows="2" size="70" id="contactMessage" name="contactMessage"></textarea>
-                  </div>
+      <div class="skill-card fade-up">
+        <div class="skill-card-icon">☁️</div>
+        <div class="skill-card-title">DevOps &amp; Infra</div>
+        <div class="skill-tags">
+          <span class="tag">Kubernetes</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Jenkins</span>
+          <span class="tag">Grafana</span>
+          <span class="tag">ELK Stack</span>
+          <span class="tag">Slack Integrations</span>
+        </div>
+      </div>
 
-                  <div>
-                     <button class="submit">Submit</button>
-                     <span id="image-loader">
-                        <img alt="" src="images/loader.gif">
-                     </span>
-                  </div>
+      <div class="skill-card fade-up">
+        <div class="skill-card-icon">🔐</div>
+        <div class="skill-card-title">Security &amp; Identity</div>
+        <div class="skill-tags">
+          <span class="tag">OAuth 2.0</span>
+          <span class="tag">SAML</span>
+          <span class="tag">Kerberos</span>
+          <span class="tag">SPNEGO</span>
+          <span class="tag">LDAP</span>
+          <span class="tag">SSO</span>
+        </div>
+      </div>
 
-               </fieldset>
-            </form> <!-- Form End -->
+      <div class="skill-card fade-up">
+        <div class="skill-card-icon">🧠</div>
+        <div class="skill-card-title">Architecture &amp; Design</div>
+        <div class="skill-tags">
+          <span class="tag">System Design</span>
+          <span class="tag">Distributed Systems</span>
+          <span class="tag">Microservices</span>
+          <span class="tag">ETL Pipelines</span>
+          <span class="tag">High-throughput</span>
+          <span class="tag">Low-latency</span>
+        </div>
+      </div>
 
-            <!-- contact-warning -->
-            <div id="message-warning"> Error boy</div>
-            <!-- contact-success -->
-            <div id="message-success">
-               <i class="fa fa-check"></i>Your message was sent, thank you!<br>
+    </div>
+  </div>
+</section>
+
+
+<section id="projects">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-eyebrow">Work</div>
+      <h2>Key projects</h2>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card fade-up">
+        <div class="project-num">01</div>
+        <div class="project-title">Agentic AI Deal Debugging</div>
+        <div class="project-desc">
+          Built a GenAI system using LangGraph and Langfuse for automated deal analysis and auto-healing at PubMatic. Designed MCP-based integrations with 20+ data sources to identify root causes of deal underperformance and drive monetization outcomes with Product alignment.
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">LangGraph</span>
+          <span class="stack-tag">Langfuse</span>
+          <span class="stack-tag">MCP</span>
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">LLM</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-num">02</div>
+        <div class="project-title">BURL — Kafka Parallel Consumer</div>
+        <div class="project-desc">
+          Real-time, high-throughput system processing 240M records/day from Kafka using Confluent Parallel Consumers. Deployed Dockerized services on Kubernetes across 10 data centers, achieving 3K QPS with sub-3-second SLA and comprehensive ELK + Slack monitoring.
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Kafka</span>
+          <span class="stack-tag">Spring Boot</span>
+          <span class="stack-tag">Kubernetes</span>
+          <span class="stack-tag">Docker</span>
+          <span class="stack-tag">ELK</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-num">03</div>
+        <div class="project-title">Sherlock Framework</div>
+        <div class="project-desc">
+          End-to-end data pipeline and analysis framework built from scratch, recognised with an Innovation Award at PubMatic. Designed for high-reliability data ingestion and insight generation at scale across the AdTech stack.
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Spark</span>
+          <span class="stack-tag">Snowflake</span>
+          <span class="stack-tag">Spring Boot</span>
+          <span class="stack-tag">Java</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-num">04</div>
+        <div class="project-title">Middleware Reporting Backend</div>
+        <div class="project-desc">
+          End-to-end Spring Boot web application that fetches and surfaces data from Snowflake for business reporting. Built Spark ETL pipelines loading transformed data into Snowflake and exposed insights through a clean API layer.
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Spring Boot</span>
+          <span class="stack-tag">Spark</span>
+          <span class="stack-tag">Snowflake</span>
+          <span class="stack-tag">Java</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-num">05</div>
+        <div class="project-title">OAuth 2.0 Enterprise Security Platform</div>
+        <div class="project-desc">
+          Designed and implemented an enterprise-grade OAuth 2.0 (RFC 6749) authorization framework and scalable SSO systems at eQ Technologic. Delivered Security-as-a-Service and Data Access Management using SAML, Kerberos, NTLM, SPNEGO, and LDAP.
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">OAuth 2.0</span>
+          <span class="stack-tag">SAML</span>
+          <span class="stack-tag">Kerberos</span>
+          <span class="stack-tag">Java</span>
+          <span class="stack-tag">LDAP</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-num">06</div>
+        <div class="project-title">English Course Backend (BYJU'S)</div>
+        <div class="project-desc">
+          Designed and built the entire backend architecture for English Course features from scratch at WhiteHat Jr. / BYJU'S Future School. Led backend across Coding, Math, English, and Arts courses on Android and iOS, plus an automated thumbnail generation framework.
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Spring Boot</span>
+          <span class="stack-tag">REST APIs</span>
+          <span class="stack-tag">Java</span>
+          <span class="stack-tag">Media Processing</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-eyebrow">Recognition</div>
+      <h2>Awards &amp; achievements</h2>
+    </div>
+    <div class="achievements-grid">
+      <div class="achievement-card fade-up">
+        <div class="achievement-icon">🥇</div>
+        <div>
+          <div class="achievement-title">1st Prize — Hackathon (Deal Doctor)</div>
+          <div class="achievement-date">PubMatic · May 2025</div>
+        </div>
+      </div>
+      <div class="achievement-card fade-up">
+        <div class="achievement-icon">💡</div>
+        <div>
+          <div class="achievement-title">Innovation Award — Sherlock Framework</div>
+          <div class="achievement-date">PubMatic · Jun 2025</div>
+        </div>
+      </div>
+      <div class="achievement-card fade-up">
+        <div class="achievement-icon">💡</div>
+        <div>
+          <div class="achievement-title">Innovation Award — BURL Solution</div>
+          <div class="achievement-date">PubMatic · Mar 2025</div>
+        </div>
+      </div>
+      <div class="achievement-card fade-up">
+        <div class="achievement-icon">🚀</div>
+        <div>
+          <div class="achievement-title">Biased Towards Action Award</div>
+          <div class="achievement-date">PubMatic · Mar 2024</div>
+        </div>
+      </div>
+      <div class="achievement-card fade-up">
+        <div class="achievement-icon">🏆</div>
+        <div>
+          <div class="achievement-title">Best Demo Award — Kafka Email Queuing</div>
+          <div class="achievement-date">PubMatic · Apr 2023</div>
+        </div>
+      </div>
+      <div class="achievement-card fade-up">
+        <div class="achievement-icon">🎓</div>
+        <div>
+          <div class="achievement-title">B.Tech — Computer Engineering</div>
+          <div class="achievement-date">College of Engineering Pune · 2015–2018</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="section-eyebrow fade-up">Contact</div>
+        <h2 class="fade-up" style="color:#fff; margin-bottom: 20px;">Let's build something<br/>remarkable.</h2>
+        <p class="contact-desc fade-up">
+          Open to senior/principal engineering roles, staff-level positions, and interesting conversations about distributed systems and AI. Based in Pune, India — available for remote or relocation.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:karandevinay@gmail.com" class="contact-link fade-up">
+            <div class="contact-link-icon">✉️</div>
+            <div class="contact-link-text">
+              <div class="contact-link-label">Email</div>
+              <div class="contact-link-value">karandevinay@gmail.com</div>
             </div>
-
-         </div>
-
-
-         <aside class="four columns footer-widgets">
-
-            <div class="widget widget_contact">
-
-               <h4>Address and Phone</h4>
-               <p class="address">
-                  Vinay Karande<br>
-                  1600 Nikash Parkway <br>
-                  Pashan View, PO 94043 Pune<br>
-                  <span>+91-8080061558</span>
-               </p>
-
+            <div class="contact-link-arrow">→</div>
+          </a>
+          <a href="https://linkedin.com/in/vinaykarande" target="_blank" rel="noopener" class="contact-link fade-up">
+            <div class="contact-link-icon">💼</div>
+            <div class="contact-link-text">
+              <div class="contact-link-label">LinkedIn</div>
+              <div class="contact-link-value">linkedin.com/in/vinaykarande</div>
             </div>
-
-            <div class="widget widget_tweets">
-
-               <h4 class="widget-title">Latest Quote</h4>
-
-               <ul id="twitter">
-                  <li>
-                     <span>
-                        Don't get overwhelmed by what everybody else is doing. Walk your path at your own pace. You'll have to keep learning anyway.
-
-                     </span>
-
-                  </li>
-               </ul>
-
+            <div class="contact-link-arrow">→</div>
+          </a>
+          <a href="https://github.com/ArtisticTank" target="_blank" rel="noopener" class="contact-link fade-up">
+            <div class="contact-link-icon">🐙</div>
+            <div class="contact-link-text">
+              <div class="contact-link-label">GitHub</div>
+              <div class="contact-link-value">github.com/ArtisticTank</div>
             </div>
-
-         </aside>
-
+            <div class="contact-link-arrow">→</div>
+          </a>
+          <a href="tel:+918080061558" class="contact-link fade-up">
+            <div class="contact-link-icon">📞</div>
+            <div class="contact-link-text">
+              <div class="contact-link-label">Phone</div>
+              <div class="contact-link-value">+91 80800 61558</div>
+            </div>
+            <div class="contact-link-arrow">→</div>
+          </a>
+        </div>
       </div>
-
-   </section>
-   <footer>
-
-      <div class="row">
-
-         <div class="twelve columns">
-
-            <ul class="social-links">
-               <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-               <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-               <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-               <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-               <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-               <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-               <li><a href="#"><i class="fa fa-skype"></i></a></li>
-            </ul>
-
-            <ul class="copyright">
-               <li>&copy; Copyright 2021.</li>
-               <li>Design by <a href="#" title="Styleshout" target="_blank">Vinay Karande</a></li>
-            </ul>
-
-         </div>
-
-         <div id="go-top"><a class="smoothscroll" title="Back to Top" href="#home"><i class="icon-up-open"></i></a>
-         </div>
-
+      <div class="contact-right fade-up">
+        <div>
+          <div class="open-to-badge">
+            <div class="open-dot"></div>
+            <span class="open-label">Open to opportunities</span>
+          </div>
+        </div>
+        <div class="contact-tagline">Principal-level engineering.<br/>Distributed at scale.<br/>AI-native.</div>
+        <p class="contact-note">
+          8 years of experience building systems that handle hundreds of millions of events daily, leading cross-functional teams, and pushing AI from prototype to production. If you're solving hard infrastructure or GenAI challenges, let's talk.
+        </p>
       </div>
+    </div>
+  </div>
+</section>
 
-   </footer>
+<!-- QUOTE -->
+<section style="padding: 72px 5vw; background: var(--surface);">
+  <div class="container">
+    <blockquote class="site-quote fade-up">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">If you think good architecture is expensive,<br/>try bad architecture!</p>
+      <cite class="quote-attr">— Brian Foote</cite>
+    </blockquote>
+  </div>
+</section>
+</main>
 
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-   <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
-   <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+<footer>
+  <p>© 2026 Vinay Karande</p>
+  <p><a href="https://github.com/ArtisticTank" target="_blank" rel="noopener">github.com/ArtisticTank</a></p>
+</footer>
 
-   <script src="js/jquery.flexslider.js"></script>
-   <script src="js/waypoints.js"></script>
-   <script src="js/jquery.fittext.js"></script>
-   <script src="js/magnific-popup.js"></script>
-   <script src="js/init.js"></script>
+<script>
+  // Scroll-triggered fade-up animations
+  const observer = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } }),
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+  // Active nav link highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const navObs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(a => a.style.color = '');
+          const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+          if (active) active.style.color = 'var(--accent)';
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+  sections.forEach(s => navObs.observe(s));
+</script>
 </body>
-
 </html>
